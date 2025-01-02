@@ -33,3 +33,9 @@ wholeConfig.regiter({
   render: () => <a-input placeholder="渲染输入框" />,
   key: 'input'
 })
+wholeConfig.regiter({
+  label: 'Checkbox',
+  preview: () => <a-checkbox>Checkbox</a-checkbox>,
+  render: () => <a-checkbox>Checkbox</a-checkbox>,
+  key: 'Checkbox'
+})

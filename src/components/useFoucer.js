@@ -2,9 +2,7 @@ import {computed,ref} from 'vue'
 export const  useFoucer = (data,callback) => {
   const selectIndex = ref(-1) //没有选择的元素
   //最后选择的哪一个
-  const lastSelectIndex = computed(()=>{
-   data.value.blocks[selectIndex.value]
-  })
+  const lastSelectblock = computed(()=> data.value.blocks[selectIndex.value])
     const cleanBlockFocus = () => {
         data.value.blocks.forEach(item => 
           item.focus = false
@@ -12,7 +10,7 @@ export const  useFoucer = (data,callback) => {
       }
       const handleMouseDown = () => {
         cleanBlockFocus()
-        electIndex.value = -1
+        selectIndex.value = -1
       }
           //实现获取焦点
           const handleMouseown = (e, block,index) => {
@@ -41,6 +39,6 @@ export const  useFoucer = (data,callback) => {
         return { focus, unfocus }
       })
       return {
-        handleMouseown,focusData,handleMouseDown,lastSelectIndex
+        handleMouseown,focusData,handleMouseDown,lastSelectblock
       }
 }

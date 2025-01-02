@@ -23,12 +23,15 @@ export default defineComponent({
     }))
     const config = inject('config')
 
-    let { handleMouseown, focusData, handleMouseDown } = useFoucer(data, (event) => {
-      //获取焦点后
-      mousedown(event)
-    })
+    let { handleMouseown, focusData, handleMouseDown, lastSelectblock } = useFoucer(
+      data,
+      (event) => {
+        //获取焦点后
+        mousedown(event)
+      }
+    )
     //实现组件拖拽
-    let { mousedown } = useblockDragger(focusData)
+    let { mousedown, markLine } = useblockDragger(focusData, lastSelectblock)
     const contentRef = ref(null)
     //实现菜单拖拽功能
     const { dragstart, dragEnd } = menuDrage(contentRef, data)
@@ -71,6 +74,8 @@ export default defineComponent({
                   class={block.focus ? 'block_down' : ''}
                 ></Eblock>
               ))}
+              {markLine.x != null && <div class="line-x" style={{ left: markLine.x + 'px' }}></div>}
+              {markLine.y != null && <div class="line-y" style={{ top: markLine.y + 'px' }}></div>}
             </div>
           </div>
         </div>
